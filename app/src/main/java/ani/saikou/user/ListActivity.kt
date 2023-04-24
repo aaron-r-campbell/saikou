@@ -74,6 +74,7 @@ class ListActivity : AppCompatActivity() {
                    R.id.title -> "title"
                    R.id.updated -> "updatedAt"
                    R.id.release -> "release"
+                   R.id.unseenCount -> "unseenCount"
                    else -> null
                }
 

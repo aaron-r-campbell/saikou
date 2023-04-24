@@ -379,6 +379,15 @@ class AnilistQueries {
                 "updatedAt" -> sorted[i]?.sortWith(compareByDescending { it.userUpdatedAt })
                 "release"   -> sorted[i]?.sortWith(compareByDescending { it.startDate })
                 "id"        -> sorted[i]?.sortWith(compareBy { it.id })
+                "unseenCount" -> sorted[i]?.sortWith(compareBy {
+                    var diff = 0
+                    if (it.anime != null) {
+                        diff = (it.anime.nextAiringEpisode ?: it.anime.totalEpisodes ?: 0) - (it.userProgress ?: 0)
+                    } else if (it.manga != null) {
+                        diff = (it.manga.totalChapters ?: 0) - (it.userProgress ?: 0)
+                    }
+                    if (diff == 0) Int.MAX_VALUE else diff
+                })
             }
         }
         return sorted
